@@ -23,7 +23,7 @@ const App = () => {
     <Fragment>
       <Router>
         <Routes>
-          <Route
+        <Route
             path="/"
             element={isAuthenticated ? <Home setAuth={setAuth} /> : <Navigate to="/login" />}
           />
@@ -33,7 +33,7 @@ const App = () => {
           />
           <Route
             path="/registration"
-            element={<Registration />}
+            element={!isAuthenticated ? <Registration setAuth={setAuth} /> : <Navigate to="/" />}
           />
         </Routes>
       </Router>

@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import './Registration.css';
+import { toast } from "react-toastify";
 
-const Registration = () => {
+const Registration = ({setAuth}) => {
   // State to hold form data
   const [formData, setFormData] = useState({
     first_name: '',
@@ -15,7 +16,7 @@ const Registration = () => {
     user_type: ''
   });
 
-  //onChnge function to update state
+  //onChange function to update state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -33,7 +34,14 @@ const Registration = () => {
         body: JSON.stringify(body)
       });
       const parseRes = await response.json();
-      console.log(parseRes);
+      if (parseRes.jwtToken) {
+        localStorage.setItem("token", parseRes.jwtToken);
+        setAuth(true);
+        toast.success("Register Successfully");
+      } else {
+        setAuth(false);
+        toast.error(parseRes);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
