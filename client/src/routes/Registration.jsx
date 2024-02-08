@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import './Registration.css';
+import {Link} from 'react-router-dom';
 import { toast } from "react-toastify";
 
 const Registration = ({setAuth}) => {
@@ -68,6 +69,7 @@ const Registration = ({setAuth}) => {
           </select>
           <button className="registration-button" type="submit">Register</button>
         </form>
+        <p>Already have an account? <Link to="/login">Login</Link></p>
       </div>
     </Fragment>
   );
