@@ -1,0 +1,68 @@
+import React, { Fragment, useState } from 'react';
+import './Registration.css';
+
+const Registration = () => {
+  // State to hold form data
+  const [formData, setFormData] = useState({
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    user_name: '',
+    user_password: '',
+    contact_no: '',
+    e_mail: '',
+    location_pst_code: '',
+    user_type: ''
+  });
+
+  //onChnge function to update state
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { ...formData };
+      const response = await fetch('http://localhost:5000/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <Fragment>
+      <div className="registration-container">
+        <h2 className="registration-title">Create an Account</h2>
+        <form className="registration-form" onSubmit={handleSubmit}>
+          <input className="registration-input" type="text" name="first_name" placeholder="First Name*" onChange={handleChange} value={formData.first_name} required />
+          <input className="registration-input" type="text" name="middle_name" placeholder="Middle Name" onChange={handleChange} value={formData.middle_name} />
+          <input className="registration-input" type="text" name="last_name" placeholder="Last Name*" onChange={handleChange} value={formData.last_name} required />
+          <input className="registration-input" type="text" name="user_name" placeholder="Username*" onChange={handleChange} value={formData.user_name} required />
+          <input className="registration-input" type="password" name="user_password" placeholder="Password*" onChange={handleChange} value={formData.user_password} required />
+          <input className="registration-input" type="text" name="contact_no" placeholder="Contact Number*" onChange={handleChange} value={formData.contact_no} required />
+          <input className="registration-input" type="email" name="e_mail" placeholder="Email*" onChange={handleChange} value={formData.e_mail} required />
+          <input className="registration-input" type="text" name="location_pst_code" placeholder="Location Postal Code*" onChange={handleChange} value={formData.location_pst_code} required />
+          <select className="registration-input" name="user_type" onChange={handleChange} value={formData.user_type} required>
+            <option value="">Select User Type*</option>
+            <option value="seller">Seller</option>
+            <option value="customer">Customer</option>
+            <option value="employee">Employee</option>
+          </select>
+          <button className="registration-button" type="submit">Register</button>
+        </form>
+      </div>
+    </Fragment>
+  );
+};
+
+export default Registration;
