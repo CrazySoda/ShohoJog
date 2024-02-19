@@ -13,7 +13,8 @@ app.use(express.json());//req.body
 
 //Register and Login Routes
 app.use("/auth", require("./routes/jwtAuth"));
-
+//product routes
+app.use("/product",require("./routes/product_router"));
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{

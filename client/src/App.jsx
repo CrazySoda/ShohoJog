@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 //routes/components
+//import all_products from "./routes/all_products";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Registration from "./routes/Registration";
@@ -21,6 +22,7 @@ const App = () => {
   //showing the routes
   return (
     <Fragment>
+
       <Router>
         <Routes>
         <Route

@@ -8,7 +8,7 @@ const Login = ({ setAuth }) => {
   // State to hold form data
   const [formData, setFormData] = useState({
     e_mail: '',
-    user_password: ''
+    user_password: '5'
   });
 
   // onChange function to update state
