@@ -8,14 +8,12 @@ const Login = ({ setAuth }) => {
   // State to hold form data
   const [formData, setFormData] = useState({
     e_mail: '',
-    user_password: '5'
+    user_password: ''
   });
-
   // onChange function to update state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +39,6 @@ const Login = ({ setAuth }) => {
       console.error('Error:', error);
     }
   };
-
   return (
     <Fragment>
       <div className="login-container">

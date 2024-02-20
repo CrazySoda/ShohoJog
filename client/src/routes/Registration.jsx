@@ -1,10 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import './Registration.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
-const Registration = ({setAuth}) => {
-  // State to hold form data
+const Registration = ({ setAuth }) => {
   const [formData, setFormData] = useState({
     first_name: '',
     middle_name: '',
@@ -14,10 +13,15 @@ const Registration = ({setAuth}) => {
     contact_no: '',
     e_mail: '',
     location_pst_code: '',
-    user_type: ''
+    user_type: '',
+    TIN: '', 
+    Website: '',
+    factory_address: '',
+    office_address: '',
+    salary: '', 
+    employee_type: ''
   });
 
-  //onChange function to update state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -48,6 +52,27 @@ const Registration = ({setAuth}) => {
     }
   };
 
+  const renderAdditionalFields = () => {
+    if (formData.user_type === 'seller') {
+      return (
+        <Fragment>
+          <input className="registration-input" type="text" name="TIN" placeholder="TIN" onChange={handleChange} value={formData.TIN} required />
+          <input className="registration-input" type="text" name="Website" placeholder="Website" onChange={handleChange} value={formData.Website} />
+          <input className="registration-input" type="text" name="factory_address" placeholder="Factory Address" onChange={handleChange} value={formData.factory_address} />
+          <input className="registration-input" type="text" name="office_address" placeholder="Office Address" onChange={handleChange} value={formData.office_address} />
+        </Fragment>
+      );
+    } else if (formData.user_type === 'employee') {
+      return (
+        <Fragment>
+          <input className="registration-input" type="text" name="salary" placeholder="Salary" onChange={handleChange} value={formData.salary} required />
+          <input className="registration-input" type="text" name="employee_type" placeholder="Employee Type" onChange={handleChange} value={formData.employee_type} required />
+        </Fragment>
+      );
+    }
+    return null;
+  };
+
   return (
     <Fragment>
       <div className="registration-container">
@@ -67,6 +92,8 @@ const Registration = ({setAuth}) => {
             <option value="customer">Customer</option>
             <option value="employee">Employee</option>
           </select>
+
+          {renderAdditionalFields()}
           <button className="registration-button" type="submit">Register</button>
         </form>
         <p>Already have an account? <Link to="/login">Login</Link></p>

@@ -12,7 +12,7 @@ product_router.get("/all_products", async (req, res) => {
     }
   });
   //GET SINGLE PRODUCTS
-  product_router.post("/getSingleProduct/:id", async (req, res) => {
+  product_router.get("/getSingleProduct/:id", async (req, res) => {
     try {
       const {id} = req.params;
       const get_single_product = await pool.query(

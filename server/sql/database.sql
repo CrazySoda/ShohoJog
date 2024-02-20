@@ -42,6 +42,7 @@ CREATE TABLE Customer (
     user_id uuid PRIMARY KEY,
 		CONSTRAINT CUSTOMER_USER_FK FOREIGN KEY (user_id) REFERENCES Users(User_id)
 );
+
 CREATE TABLE Product_category(
 Category_id SERIAL PRIMARY KEY,
 Category_name VARCHAR(50)

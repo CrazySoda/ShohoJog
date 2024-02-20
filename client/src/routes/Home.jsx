@@ -1,35 +1,23 @@
-// import React, { Fragment } from 'react';
-
-// const Home = ({ setAuth }) => {
-//   const handleLogout = () => {
-//     setAuth(false);
-//   };
-
-//   return (
-//     <Fragment>
-//       <h1>Home</h1>
-//       <button onClick={handleLogout}>Log out</button>
-//     </Fragment>
-//   );
-// };
-
-// export default Home;
-// Home.jsx
 import React, { Fragment } from 'react';
-import AllProducts from './all_products'; // Import the AllProducts component
+import AllProducts from './All_products'; // Import the AllProducts component
+import { Link } from 'react-router-dom'; // Import Link for routing
 
 const Home = ({ setAuth }) => {
-  const handleLogout = () => {
-    setAuth(false);
-  };
-
   return (
     <Fragment>
-      <h1>Home</h1>
-      <button onClick={handleLogout}>Log out</button>
+      {/* Title Bar */}
+      <div className="title-bar">
+        <h1>Shohojog</h1>
+        <div className="login-option">
+          <Link to="/login">Log in</Link>
+        </div>
+      </div>
+
+      {/* All Products */}
       <AllProducts /> {/* Render the AllProducts component */}
     </Fragment>
   );
 };
 
 export default Home;
+

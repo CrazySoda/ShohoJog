@@ -2,19 +2,9 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-//import { FiShoppingCart } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // Import Link component
 
-//import "./Card.css"; // Import CSS file for styling
-
-const Card = ({ productName, price, category, status }) => {
-  const navigate = useNavigate();
-
-  const handleAddToCart = () => {
-    // Add to cart functionality
-    console.log("Adding to cart...");
-  };
-
+const Card = ({ productId, productName, price, category, status }) => { // Add productId prop
   return (
     <div className="card">
       <div className="card__body">
@@ -36,13 +26,8 @@ const Card = ({ productName, price, category, status }) => {
 
       {/* Button Container */}
       <div className="card__button-container">
-        {/* Add to Cart Button */}
-        <button className="card__btn card__btn--add-to-cart" onClick={handleAddToCart}>
-          {/* // <FiShoppingCart /> Add to Cart */}
-        </button>
-
         {/* View Details Button */}
-        <Link to="/product-details" className="card__btn card__btn--view-details">
+        <Link to={`/product/${productId}`} className="card__btn card__btn--view-details"> {/* Pass productId to URL */}
           View Details
         </Link>
       </div>
@@ -51,8 +36,9 @@ const Card = ({ productName, price, category, status }) => {
 };
 
 Card.propTypes = {
+  productId: PropTypes.number.isRequired, // Add productId prop type
   productName: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired
 };
