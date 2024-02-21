@@ -23,7 +23,7 @@ const Home_Customer = ({ setAuth }) => {
         <div className="options">
           {/* Add links for messaging, my profile, and my cart */}
           <button onClick={() => navigate('/messaging')}>Messaging</button>
-          <button onClick={() => navigate('/my-profile')}>My Profile</button>
+          <button onClick={() => navigate('/my_Profile')}>My Profile</button>
           <button onClick={() => navigate('/my-cart')}>My Cart</button>
         </div>
       </div>

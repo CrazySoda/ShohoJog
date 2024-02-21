@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 const validInfo = require("../middleware/validinfo");
 const authorization = require("../middleware/authorization");
-require("dotenv").config()
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 router.post("/register", validInfo, async (req, res) => {
@@ -25,7 +25,7 @@ router.post("/register", validInfo, async (req, res) => {
       factory_address,
       office_address,
       salary, // Additional fields for employee
-      employee_type
+      employee_type,
     } = req.body;
 
     // Check if user exists
@@ -72,10 +72,9 @@ router.post("/register", validInfo, async (req, res) => {
           [user_id, TIN, Website, factory_address, office_address]
         );
       } else if (user_type === "customer") {
-        await client.query(
-          "INSERT INTO customer (user_id) VALUES ($1)",
-          [user_id]
-        );
+        await client.query("INSERT INTO customer (user_id) VALUES ($1)", [
+          user_id,
+        ]);
       } else if (user_type === "employee") {
         await client.query(
           "INSERT INTO employee (employee_id, salary, employee_type) VALUES ($1, $2, $3)",
@@ -104,7 +103,6 @@ router.post("/register", validInfo, async (req, res) => {
   }
 });
 
-
 //login route
 router.post("/login", validInfo, async (req, res) => {
   try {
@@ -112,22 +110,28 @@ router.post("/login", validInfo, async (req, res) => {
     const { e_mail, user_password } = req.body;
 
     // Check if user exists
-    const user = await pool.query("SELECT * FROM users WHERE e_mail = $1", [e_mail]);
+    const user = await pool.query("SELECT * FROM users WHERE e_mail = $1", [
+      e_mail,
+    ]);
 
     if (user.rows.length === 0) {
       return res.status(401).json("Password or Email is incorrect");
     }
 
     // Check if the password is valid
-    const validPassword = await bcrypt.compare(user_password, user.rows[0].user_password);
+    const validPassword = await bcrypt.compare(
+      user_password,
+      user.rows[0].user_password
+    );
     if (!validPassword) {
       return res.status(401).json("Password or Email is incorrect");
     }
 
     // Get user type
-    const userTypeQuery = await pool.query("SELECT user_type FROM users WHERE e_mail = $1", [
-      e_mail,
-    ]);
+    const userTypeQuery = await pool.query(
+      "SELECT user_type FROM users WHERE e_mail = $1",
+      [e_mail]
+    );
 
     // Extract the user type from the query result
     const userType = userTypeQuery.rows[0].user_type;
@@ -152,6 +156,5 @@ router.get("/is-verify", authorization, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 
 module.exports = router;

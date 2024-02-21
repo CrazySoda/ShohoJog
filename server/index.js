@@ -15,6 +15,7 @@ app.use(express.json());//req.body
 app.use("/auth", require("./routes/jwtAuth"));
 //product routes
 app.use("/product",require("./routes/product_router"));
+app.use("/customer",require("./routes/customer_router"));
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{
