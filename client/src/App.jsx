@@ -1,18 +1,88 @@
-import React, { Fragment, useState,useEffect } from "react";
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+/* // App.jsx
+import React, { Fragment, useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 import Home_Customer from "./routes/Home_Customer";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Registration from "./routes/Registration";
-import ProductDetails from "./routes/ProductDetails"; 
+import ProductDetails from "./routes/ProductDetails";
 
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userType, setUserType] = useState(null); // Add userType state
+
+  const setAuth = (boolean) => {
+    setIsAuthenticated(boolean);
+  };
+
+  async function isAuth() {
+    try {
+      const response = await fetch("http://localhost:5000/auth/is-verify", {
+        method: "GET",
+        headers: { jwtToken: localStorage.token },
+      });
+
+      const parseRes = await response.json();
+
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    isAuth();
+  }, []);
+
+  return (
+    <Fragment>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/Home_Customer"
+            element={
+              isAuthenticated ? (
+                <Home_Customer />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/login"
+            element={<Login setAuth={setAuth} />} // Pass setUserType to Login
+          />
+          <Route
+            path="/registration"
+            element={
+              !isAuthenticated ? (
+                <Registration setAuth={setAuth} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        </Routes>
+      </Router>
+    </Fragment>
+  );
+};
+
+export default App;
+ */
+
+import React, { Fragment, useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+
+import Home_Customer from "./routes/Home_Customer";
+import Home from "./routes/Home";
+import Login from "./routes/Login";
+import Registration from "./routes/Registration";
+import ProductDetails from "./routes/ProductDetails";
+//import Cart from "./routes/Cart";
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -29,9 +99,7 @@ const App = () => {
 
       const parseRes = await response.json();
 
-      parseRes === true
-        ? setIsAuthenticated(true)
-        : setIsAuthenticated(false);
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
     } catch (err) {
       console.error(err.message);
     }
@@ -40,35 +108,27 @@ const App = () => {
   useEffect(() => {
     isAuth();
   }, []);
-  
+
   return (
     <Fragment>
       <Router>
         <Routes>
-          <Route path="/" 
-          element={
-          <Home />
-          }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/Cart" element={<Home />} />
           <Route
-            path="/Home_Customer"
-            element={
-              isAuthenticated ? (
-                <Home_Customer setAuth={setAuth} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
+           path="/Home_Customer"
+           element={
+             isAuthenticated ? (
+               <Home_Customer setAuth={setAuth} />
+             ) : (
+               <Navigate to="/login" />
+             )
+           }
+         />
+         
           <Route
             path="/login"
-            element={
-              !isAuthenticated ? (
-                <Login setAuth={setAuth} />
-              ) : (
-                <Navigate to="/Home_Customer" />
-              )
-            }
+            element={<Login setAuth={setAuth} />} // Pass setUserType to Login
           />
           <Route
             path="/registration"
@@ -76,12 +136,11 @@ const App = () => {
               !isAuthenticated ? (
                 <Registration setAuth={setAuth} />
               ) : (
-                <Navigate to="/" />
+                <Navigate to="/login" />
               )
             }
           />
-          <Route path="/product/:id" element={<ProductDetails />} />{" "}
-
+          <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
       </Router>
     </Fragment>
