@@ -15,4 +15,15 @@ customer_router.get("/get_customer/:id", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+customer_router.post("/add_to_cart", async (req, res) => {
+  try {
+    const { user_id, product_id} = req.params;
+    
+    res.json("Product added to cart");
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = customer_router;
