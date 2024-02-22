@@ -17,7 +17,7 @@ app.use("/auth", require("./routes/jwtAuth"));
 app.use("/product",require("./routes/product_router"));
 app.use("/customer",require("./routes/customer_router"));
 app.use("/seller",require("./routes/seller"));
-
+//app.use("/order",require("./routes/order"));
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`);

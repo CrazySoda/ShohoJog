@@ -109,7 +109,7 @@ CREATE TABLE Courier_Service (
     vehicle_type VARCHAR(50),
 		CONSTRAINT fk_courier_employee FOREIGN KEY (service_id) REFERENCES Employee(employee_id)
 );
-CREATE TABLE "Order" (
+CREATE TABLE Order (
     order_id SERIAL PRIMARY KEY,
     order_date DATE NOT NULL,
     isConfirm BOOLEAN NOT NULL,
