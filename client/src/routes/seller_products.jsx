@@ -32,7 +32,7 @@ const SellerProducts = () => {
             productName={product.product_name}
             price={product.price}
             category={product.product_category}
-            status={product.status}
+            stock={product.stock}
           />
         ))}
       </div>

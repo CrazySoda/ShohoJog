@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 //import "./Card.css"; // Import CSS file for styling
 
-const Card_seller = ({ productName, price, category, status }) => {
+const Card_seller = ({ productName, price, category, stock }) => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
@@ -30,7 +30,7 @@ const Card_seller = ({ productName, price, category, status }) => {
         <p className="card__description"><strong>Category: </strong>{category}</p>
 
         {/* Product Status */}
-        <p className="card__description"><strong>Status: </strong>{status}</p>
+        <p className="card__description"><strong>Stock: </strong>{stock}</p>
       </div>
 
       {/* Button Container */}

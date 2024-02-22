@@ -55,12 +55,14 @@ CREATE TABLE Product (
     Price DECIMAL(10, 2), -- 
     Product_category VARCHAR(50),
     Product_features TEXT,
-    seller_id uuid NOT NULL,
+    Seller_id uuid NOT NULL,
 		Category_id INT NOT NULL,
-		Status VARCHAR(255),
+		Stock INT ,
 		CONSTRAINT NO_NEGATIVE_price CHECK(Price >= 0),
 	--	CONSTRAINT STATUS_CHECK CHECK(Status is in ('upcoming','in stock','stock out')),
-	CONSTRAINT STATUS_CHECK CHECK (Status = 'upcoming' OR Status = 'in stock' OR Status = 'stock out') ,
+	 CONSTRAINT NO_NEGATIVE_STOCK CHECK (
+        Stock >= 0
+   ),
 		CONSTRAINT Category_product FOREIGN KEY (Category_id) REFERENCES Product_category(Category_id),
    CONSTRAINT fk_seller_product FOREIGN KEY (seller_id) REFERENCES Seller(user_id)
 );

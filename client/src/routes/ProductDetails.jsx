@@ -31,7 +31,7 @@ const ProductDetails = () => {
           <p>Price: {product.price}</p>
           <p>Category: {product.product_category}</p>
           <p>Features: {product.product_features}</p>
-          <p>Status: {product.status}</p>
+          <p>Stock: {product.stock}</p>
           {/* Add more details here */}
         </div>
       )}

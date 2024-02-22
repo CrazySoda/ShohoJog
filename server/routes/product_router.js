@@ -5,7 +5,7 @@ const product_router = express.Router();
 //TO GET ALL PRODUCTS 
 product_router.get("/all_products", async (req, res) => {
     try {
-      const all_products = await pool.query("SELECT * FROM product where status = 'in stock'");
+      const all_products = await pool.query("SELECT * FROM product where stock >= 0");
       res.json(all_products.rows);
     } catch (err) {
       console.error(err.message);

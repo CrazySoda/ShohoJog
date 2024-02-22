@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom"; // Import Link component
 
-const Card = ({ productId, productName, price, category, status }) => { // Add productId prop
+const Card = ({ productId, productName, price, category, stock }) => { // Add productId prop
   return (
     <div className="card">
       <div className="card__body">
@@ -21,7 +21,7 @@ const Card = ({ productId, productName, price, category, status }) => { // Add p
         <p className="card__description"><strong>Category: </strong>{category}</p>
 
         {/* Product Status */}
-        <p className="card__description"><strong>Status: </strong>{status}</p>
+        <p className="card__description"><strong>Stock </strong>{stock}</p>
       </div>
 
       {/* Button Container */}
